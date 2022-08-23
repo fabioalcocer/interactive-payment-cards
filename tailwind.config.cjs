@@ -2,7 +2,13 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "mobile-bg": "url('/src/assets/bg-main-mobile.png')",
+        "card-front": "url('/src/assets/bg-card-front.png')",
+        "card-back": "url('/src/assets/bg-card-back.png')",
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("prettier-plugin-tailwindcss")],
 };
