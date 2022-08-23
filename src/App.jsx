@@ -3,8 +3,9 @@ import Form from "./components/Form";
 
 function App() {
   const [cardName, setCardName] = useState("");
-  const [cardNumber, setCardNumber] = useState(0);
-  const [cardDate, setCardDate] = useState(0);
+  const [cardNumber, setCardNumber] = useState("0000 0000 0000 0000");
+  const [cardMonth, setCardMonth] = useState(0);
+  const [cardYear, setCardYear] = useState(0);
   const [cardCvc, setCardCvc] = useState(0);
 
   return (
@@ -17,20 +18,17 @@ function App() {
                 {cardCvc}
               </p>
             </div>
-
-            <div className="absolute top-24 min-w-[320px] flex flex-col justify-end rounded-md bg-card-front bg-cover py-3 px-4 pr-7">
+            <div className="absolute top-24 flex min-w-[320px] flex-col justify-end rounded-md bg-card-front bg-cover py-3 px-4 pr-7">
               <div className="mb-3 h-16">
                 <span className="absolute top-6 left-6 h-10 w-10 rounded-full bg-white"></span>
                 <span className="absolute top-9 left-20 h-4 w-4 rounded-full border border-white"></span>
               </div>
-
               <p className="p-2 text-xl tracking-widest text-white">
                 {cardNumber}
               </p>
-
               <div className="mt-2 flex items-center justify-between p-2 pt-0 pr-1 text-sm font-light text-slate-200">
                 <p className="uppercase">{cardName}</p>
-                <p>{cardDate}</p>
+                <p>{`${cardMonth}/${cardYear}`}</p>
               </div>
             </div>
           </div>
@@ -39,8 +37,9 @@ function App() {
         <Form
           setName={setCardName}
           setNumber={setCardNumber}
-          setDate={setCardDate}
-          setCardCvc={setCardCvc}
+          setMonth={setCardMonth}
+          setYear={setCardYear}
+          setCvc={setCardCvc}
         />
       </main>
     </div>

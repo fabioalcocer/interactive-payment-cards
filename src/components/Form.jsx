@@ -1,4 +1,10 @@
-function Form({ setName, setNumber, setDate, setCardCvc }) {
+function Form({ setName, setNumber, setMonth, setYear, setCvc }) {
+  const handleNumber = (e) => {
+    e.target.value
+      ? setNumber(e.target.value)
+      : setNumber("0000 0000 0000 0000");
+  };
+
   return (
     <div className="p-2">
       <form className="flex flex-col gap-3">
@@ -23,40 +29,45 @@ function Form({ setName, setNumber, setDate, setCardCvc }) {
             Card number
           </label>
           <input
-            onChange={(e) => {
-              setNumber(e.target.value);
-            }}
-            required=""
+            onChange={handleNumber}
+            required
             autoComplete="cc-number"
             id="number"
             name="number"
             type="text"
             inputMode="numeric"
-            pattern="[0-9]*"
+            pattern="[0-9\s]{13,16}"
             aria-describedby="error-for-number tooltip-for-number"
             data-current-field="number"
             placeholder="e.g 1234 5678 9123 0000"
             aria-invalid="false"
-            maxLength={19}
+            maxLength={16}
             className="rounded-md border border-slate-300 p-2 pl-4"
           />
         </div>
 
-        <div className="" style={{"display": "inline-flex"}}>
+        <div className="grid grid-cols-[1fr_1fr_2fr] gap-1">
           <div className="flex flex-col">
-            <label htmlFor="month" className="text-sm uppercase tracking-widest">
+            <label
+              htmlFor="month"
+              className="text-sm uppercase tracking-widest"
+            >
               Exp.date
             </label>
             <input
               onChange={(e) => {
-                setName(e.target.value);
+                setMonth(e.target.value);
               }}
               id="month"
               type="text"
-              name="number"
+              name="month"
               placeholder="MM"
-              autoComplete="off"
-              className="rounded-md border border-slate-300 p-2 pl-4"
+              className="w-full rounded-md border border-slate-300 p-2 pl-4"
+              required
+              pattern="[0-9\s]{13,16}"
+              data-current-field="number"
+              aria-invalid="false"
+              maxLength={2}
             />
           </div>
           <div className="flex flex-col">
@@ -65,14 +76,18 @@ function Form({ setName, setNumber, setDate, setCardCvc }) {
             </label>
             <input
               onChange={(e) => {
-                setName(e.target.value);
+                setYear(e.target.value);
               }}
               id="year"
               type="text"
-              name="number"
+              name="year"
               placeholder="YY"
-              autoComplete="off"
-              className="rounded-md border border-slate-300 p-2 pl-4"
+              className="w-full rounded-md border border-slate-300 p-2 pl-4"
+              required
+              pattern="[0-9\s]{13,16}"
+              data-current-field="number"
+              aria-invalid="false"
+              maxLength={2}
             />
           </div>
           <div className="flex flex-col">
@@ -81,20 +96,21 @@ function Form({ setName, setNumber, setDate, setCardCvc }) {
             </label>
             <input
               onChange={(e) => {
-                setName(e.target.value);
+                setCvc(e.target.value);
               }}
-              id="cvc"
+              id="year"
               type="text"
-              name="number"
-              placeholder="e.g 123"
-              autoComplete="off"
-              className="rounded-md border border-slate-300 p-2 pl-4"
+              name="cvc"
+              placeholder="CVC"
+              className="w-full rounded-md border border-slate-300 p-2 pl-4"
+              required
+              pattern="[0-9\s]{13,16}"
+              data-current-field="number"
+              aria-invalid="false"
+              maxLength={3}
             />
           </div>
         </div>
-
-
-        
       </form>
     </div>
   );
