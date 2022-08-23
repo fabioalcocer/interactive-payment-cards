@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App bg-mobile-bg bg-contain bg-no-repeat">
       <main className="flex flex-col p-4">
-        <section className="min-h-[50vh]">
+        <section className="min-h-[60vh]">
           <div className="relative mt-5 h-max">
             <div className="absolute right-0 h-48 w-72 rounded-md bg-card-back bg-contain bg-no-repeat p-4">
               <p className="absolute right-9 top-16 text-sm leading-7 tracking-widest text-slate-100">
