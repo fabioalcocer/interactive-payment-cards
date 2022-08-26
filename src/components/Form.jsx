@@ -6,7 +6,7 @@ function Form({ setName, setNumber, setMonth, setYear, setCvc }) {
   };
 
   return (
-    <div className="p-2">
+    <div className="p-2 z-10 max-w-sm">
       <form className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
           <label htmlFor="name" className="text-sm uppercase tracking-widest">
@@ -111,6 +111,9 @@ function Form({ setName, setNumber, setMonth, setYear, setCvc }) {
             />
           </div>
         </div>
+        
+        <button type="submit" className="w-full bg-slate-800 p-2 rounded-lg text-slate-200 mt-3">Confirm</button>
+      
       </form>
     </div>
   );
