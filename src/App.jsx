@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Form from "./components/Form";
+import Success from "./components/Success";
 
 function App() {
   const [cardName, setCardName] = useState("");
@@ -8,13 +9,14 @@ function App() {
   const [cardYear, setCardYear] = useState(0);
   const [cardCvc, setCardCvc] = useState(0);
 
+
   return (
     <div className="App mx-auto max-w-7xl bg-mobile-bg bg-contain bg-no-repeat sm:bg-desktop-bg">
       <main className="mx-auto flex min-h-screen flex-col items-center p-4 md:flex-row md:justify-evenly">
         <section className="min-h-[55vh] w-[357px]">
           <div className="relative mt-5 h-max md:ml-5">
             <div className="absolute right-0 h-48 w-72 rounded-md bg-card-back bg-contain bg-no-repeat p-4 md:top-48 md:left-20 md:w-80">
-              <p className="absolute right-9 top-16 text-sm leading-7 md:leading-10 tracking-widest text-slate-100">
+              <p className="absolute right-9 top-16 text-sm leading-7 tracking-widest text-slate-100 md:leading-10">
                 {cardCvc}
               </p>
             </div>
@@ -34,13 +36,17 @@ function App() {
           </div>
         </section>
 
-        <Form
-          setName={setCardName}
-          setNumber={setCardNumber}
-          setMonth={setCardMonth}
-          setYear={setCardYear}
-          setCvc={setCardCvc}
-        />
+        {false ? (
+          <Form
+            setName={setCardName}
+            setNumber={setCardNumber}
+            setMonth={setCardMonth}
+            setYear={setCardYear}
+            setCvc={setCardCvc}
+          />
+        ) : (
+          <Success />
+        )}
       </main>
     </div>
   );

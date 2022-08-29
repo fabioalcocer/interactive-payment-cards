@@ -1,13 +1,30 @@
+import { useRef } from "react";
+
 function Form({ setName, setNumber, setMonth, setYear, setCvc }) {
+  const formRef = useRef(null);
+
   const handleNumber = (e) => {
+    e.target.value = e.target.value
+      .replace(/[^\dA-Z]/g, "")
+      .replace(/(.{4})/g, "$1 ")
+      .trim();
+
     e.target.value
       ? setNumber(e.target.value)
       : setNumber("0000 0000 0000 0000");
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(formRef.current);
+    const objData = Object.fromEntries(data);
+
+    console.log(objData);
+  };
+
   return (
-    <div className="p-2 z-10 max-w-sm">
-      <form className="flex flex-col gap-3">
+    <div className="z-10 max-w-sm p-2">
+      <form className="flex flex-col gap-3" ref={formRef} onSubmit={handleSubmit}>
         <div className="flex flex-col gap-1">
           <label htmlFor="name" className="text-sm uppercase tracking-widest">
             Cardholder name
@@ -18,7 +35,7 @@ function Form({ setName, setNumber, setMonth, setYear, setCvc }) {
             }}
             id="name"
             type="text"
-            name="number"
+            name="name"
             placeholder="e.g Jane Applessed"
             autoComplete="off"
             className="rounded-md border border-slate-300 p-2 pl-4"
@@ -36,12 +53,10 @@ function Form({ setName, setNumber, setMonth, setYear, setCvc }) {
             name="number"
             type="text"
             inputMode="numeric"
-            pattern="[0-9\s]{13,16}"
-            aria-describedby="error-for-number tooltip-for-number"
             data-current-field="number"
             placeholder="e.g 1234 5678 9123 0000"
             aria-invalid="false"
-            maxLength={16}
+            maxLength={19}
             className="rounded-md border border-slate-300 p-2 pl-4"
           />
         </div>
@@ -64,7 +79,6 @@ function Form({ setName, setNumber, setMonth, setYear, setCvc }) {
               placeholder="MM"
               className="w-full rounded-md border border-slate-300 p-2 pl-4"
               required
-              pattern="[0-9\s]{13,16}"
               data-current-field="number"
               aria-invalid="false"
               maxLength={2}
@@ -84,7 +98,6 @@ function Form({ setName, setNumber, setMonth, setYear, setCvc }) {
               placeholder="YY"
               className="w-full rounded-md border border-slate-300 p-2 pl-4"
               required
-              pattern="[0-9\s]{13,16}"
               data-current-field="number"
               aria-invalid="false"
               maxLength={2}
@@ -104,16 +117,19 @@ function Form({ setName, setNumber, setMonth, setYear, setCvc }) {
               placeholder="CVC"
               className="w-full rounded-md border border-slate-300 p-2 pl-4"
               required
-              pattern="[0-9\s]{13,16}"
               data-current-field="number"
               aria-invalid="false"
               maxLength={3}
             />
           </div>
         </div>
-        
-        <button type="submit" className="w-full bg-slate-800 p-2 rounded-lg text-slate-200 mt-3">Confirm</button>
-      
+
+        <button
+          type="submit"
+          className="mt-3 w-full rounded-lg bg-slate-800 p-2 text-slate-200"
+        >
+          Confirm
+        </button>
       </form>
     </div>
   );
