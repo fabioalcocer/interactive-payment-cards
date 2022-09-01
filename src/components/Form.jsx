@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-function Form({ setName, setNumber, setMonth, setYear, setCvc }) {
+function Form({ setName, setNumber, setMonth, setYear, setCvc, setShow }) {
   const formRef = useRef(null);
 
   const handleNumber = (e) => {
@@ -16,6 +16,8 @@ function Form({ setName, setNumber, setMonth, setYear, setCvc }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setShow(true);
+
     const data = new FormData(formRef.current);
     const objData = Object.fromEntries(data);
 
@@ -24,7 +26,11 @@ function Form({ setName, setNumber, setMonth, setYear, setCvc }) {
 
   return (
     <div className="z-10 max-w-sm p-2">
-      <form className="flex flex-col gap-3" ref={formRef} onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col gap-3"
+        ref={formRef}
+        onSubmit={handleSubmit}
+      >
         <div className="flex flex-col gap-1">
           <label htmlFor="name" className="text-sm uppercase tracking-widest">
             Cardholder name

@@ -3,12 +3,13 @@ import Form from "./components/Form";
 import Success from "./components/Success";
 
 function App() {
+  const [show, setShow] = useState(false);
+
   const [cardName, setCardName] = useState("");
   const [cardNumber, setCardNumber] = useState("0000 0000 0000 0000");
   const [cardMonth, setCardMonth] = useState(0);
   const [cardYear, setCardYear] = useState(0);
   const [cardCvc, setCardCvc] = useState(0);
-
 
   return (
     <div className="App mx-auto max-w-7xl bg-mobile-bg bg-contain bg-no-repeat sm:bg-desktop-bg">
@@ -36,16 +37,17 @@ function App() {
           </div>
         </section>
 
-        {false ? (
+        {show ? (
+          <Success setShow={setShow} />
+        ) : (
           <Form
             setName={setCardName}
             setNumber={setCardNumber}
             setMonth={setCardMonth}
             setYear={setCardYear}
             setCvc={setCardCvc}
+            setShow={setShow}
           />
-        ) : (
-          <Success />
         )}
       </main>
     </div>
