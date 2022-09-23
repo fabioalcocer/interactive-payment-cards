@@ -1,44 +1,11 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 
-function Form({
-  setName,
-  setNumber,
-  setMonth,
-  setYear,
-  setCvc,
-  setShow,
-}) {
-  const [dataForm, setDataForm] = useState({})
-
+function Form({ setShow, handleChange }) {
   const formRef = useRef(null)
-
-  const handleNumber = (e) => {
-    e.target.value = e.target.value
-      .replace(/[^\dA-Z]/g, '')
-      .replace(/(.{4})/g, '$1 ')
-      .trim()
-
-    e.target.value
-      ? setNumber(e.target.value)
-      : setNumber('0000 0000 0000 0000')
-  }
-
-  const handleName = (e) => {
-    setName(e.target.value)
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     setShow(true)
-
-    const data = new FormData(formRef.current)
-    const objData = Object.fromEntries(data)
-
-    console.table(objData)
-
-    objData.name === 'fabio alcocer'
-      ? setDataForm({ ...objData, validate: 'Success!' })
-      : setDataForm(objData)
   }
 
   return (
@@ -56,7 +23,7 @@ function Form({
             Cardholder name
           </label>
           <input
-            onChange={handleName}
+            onChange={handleChange}
             id='name'
             placeholder='e.g Jane Applessed'
             type='text'
@@ -80,7 +47,7 @@ function Form({
             Card number
           </label>
           <input
-            onChange={handleNumber}
+            onChange={handleChange}
             required
             autoComplete='cc-number'
             id='number'
@@ -106,9 +73,7 @@ function Form({
               Exp.date
             </label>
             <input
-              onChange={(e) => {
-                setMonth(e.target.value)
-              }}
+              onChange={handleChange}
               id='month'
               type='text'
               name='month'
@@ -130,9 +95,7 @@ function Form({
               (MM/YY)
             </label>
             <input
-              onChange={(e) => {
-                setYear(e.target.value)
-              }}
+              onChange={handleChange}
               id='year'
               type='text'
               name='year'
@@ -154,9 +117,7 @@ function Form({
               CVC
             </label>
             <input
-              onChange={(e) => {
-                setCvc(e.target.value)
-              }}
+              onChange={handleChange}
               id='year'
               type='text'
               name='cvc'
@@ -179,8 +140,6 @@ function Form({
           Confirm
         </button>
       </form>
-
-      <h1>{`The verification is: ${dataForm.validate}`}</h1>
     </div>
   )
 }
